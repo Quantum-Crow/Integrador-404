@@ -24,7 +24,6 @@ def mostrar_clima(datos_clima):
         print(f"Temperatura: {datos_clima['main']['temp']}°C")
         print(f"Descripción: {datos_clima['weather'][0]['description']}")
         print(f"Humedad: {datos_clima['main']['humidity']}%")
-        print(f"Velocidad del viento: {datos_clima['wind']['speed']} m/s")
     else:
         print("No se pudo obtener el clima.")
 
