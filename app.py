@@ -1,10 +1,9 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 import requests
 
 app = Flask(__name__)
 
-@app.route('/')
-def obtener_clima(ciudad, api_key):
+def obtener_clima(ciudad, api_key, unidades):
     url_base = "http://api.openweathermap.org/data/2.5/weather"
     parametros = {
         'q': ciudad,
@@ -19,22 +18,12 @@ def obtener_clima(ciudad, api_key):
         datos = respuesta.json()
         return datos
     else:
-        print(f"Error: {respuesta.status_code}")
         return None
 
-def mostrar_clima(datos_clima):
-    if datos_clima:
-        print(f"Clima en {datos_clima['name']}, {datos_clima['sys']['country']}:")
-        print(f"Temperatura: {datos_clima['main']['temp']}°C")
-        print(f"Descripción: {datos_clima['weather'][0]['description']}")
-        print(f"Humedad: {datos_clima['main']['humidity']}%")
-    else:
-        print("No se pudo obtener el clima.")
-
-if __name__ == "__main__":
-    api_key = "74c4a6477a423e5ba799eef8170910f9" 
-    ciudad = input("Introduce el nombre de la ciudad: ")
-    unidades = input("Introduce la unidad de temperatura (C para Celsius, F para Fahrenheit): ").upper()
+@app.route('/clima', methods=['GET'])
+def clima():
+    ciudad = request.args.get('ciudad')
+    unidades = request.args.get('unidades', 'C').upper()
 
     if unidades == 'C':
         unidades = 'metric'
@@ -43,11 +32,22 @@ if __name__ == "__main__":
         unidades = 'imperial'
         unidad_temp = 'F'
     else:
-        print("Unidad de temperatura no válida. Usando Celsius por defecto.")
         unidades = 'metric'
         unidad_temp = 'C'
-    datos_clima = obtener_clima(ciudad, api_key)
-    mostrar_clima(datos_clima)
+
+    api_key = "Poner api"  
+    datos_clima = obtener_clima(ciudad, api_key, unidades)
+
+    if datos_clima:
+        return jsonify({
+            'ciudad': datos_clima['name'],
+            'pais': datos_clima['sys']['country'],
+            'temperatura': f"{datos_clima['main']['temp']}°{unidad_temp}",
+            'descripcion': datos_clima['weather'][0]['description'],
+            'humedad': f"{datos_clima['main']['humidity']}%",
+        })
+    else:
+        return jsonify({'error': 'No se pudo obtener el clima'}), 400
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=8000)
+    app.run(host='0.0.0.0', port=5000)
