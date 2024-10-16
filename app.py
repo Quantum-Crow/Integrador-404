@@ -1,5 +1,9 @@
+from flask import Flask, request
 import requests
 
+app = Flask(__name__)
+
+@app.route('/')
 def obtener_clima(ciudad, api_key):
     url_base = "http://api.openweathermap.org/data/2.5/weather"
     parametros = {
@@ -44,3 +48,6 @@ if __name__ == "__main__":
         unidad_temp = 'C'
     datos_clima = obtener_clima(ciudad, api_key)
     mostrar_clima(datos_clima)
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=8000)
