@@ -35,7 +35,7 @@ def clima():
         unidades = 'metric'
         unidad_temp = 'C'
 
-    api_key = "TU_API_KEY"  
+    api_key = "28948f71c93a9489ea957737009e4b8d"  
     datos_clima = obtener_clima(ciudad, api_key, unidades)
 
     if datos_clima:
@@ -45,10 +45,9 @@ def clima():
             'temperatura': f"{datos_clima['main']['temp']}°{unidad_temp}",
             'descripcion': datos_clima['weather'][0]['description'],
             'humedad': f"{datos_clima['main']['humidity']}%",
-            'velocidad_viento': f"{datos_clima['wind']['speed']} m/s"
         })
     else:
         return jsonify({'error': 'No se pudo obtener el clima'}), 400
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=8000)
+    app.run(host='0.0.0.0', port=5000)
