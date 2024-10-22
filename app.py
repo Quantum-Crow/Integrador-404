@@ -39,7 +39,7 @@ def clima():
         unidades = 'metric'
         unidad_temp = 'C'
 
-    api_key = "ponerApi"  #  <----------------- Aca va el api, recordar
+    api_key = "28948f71c93a9489ea957737009e4b8d"  #  <----------------- Aca va el api, recordar
     datos_clima = obtener_clima(ciudad, api_key, unidades)
 
     if datos_clima:
