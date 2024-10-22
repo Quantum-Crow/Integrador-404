@@ -16,12 +16,22 @@
         .result {
             margin-top: 20px;
         }
+        .form-container {
+            display: none;
+        }
+        .form-container.active {
+            display: block;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Consulta el Clima</h1>
-        <form id="climaForm">
+        <button onclick="mostrarFormulario('climaForm')">Consultar Clima</button>
+        <button onclick="mostrarFormulario('pronosticoForm')">Consultar Pronóstico</button>
+        <button onclick="mostrarFormulario('historialForm')">Ver Historial</button>
+
+        <form id="climaForm" class="form-container">
             <label for="ciudad">Ciudad:</label>
             <input type="text" id="ciudad" name="ciudad" required>
             <br><br>
@@ -33,10 +43,39 @@
             <br><br>
             <button type="submit">Consultar</button>
         </form>
+
+        <form id="pronosticoForm" class="form-container">
+            <label for="ciudadPronostico">Ciudad:</label>
+            <input type="text" id="ciudadPronostico" name="ciudad" required>
+            <br><br>
+            <label for="unidadesPronostico">Unidades:</label>
+            <select id="unidadesPronostico" name="unidades">
+                <option value="C">Celsius</option>
+                <option value="F">Fahrenheit</option>
+            </select>
+            <br><br>
+            <label for="fecha">Fecha:</label>
+            <input type="date" id="fecha" name="fecha" required>
+            <br><br>
+            <button type="submit">Consultar Pronóstico</button>
+        </form>
+
+        <div id="historialForm" class="form-container">
+            <h2>Historial</h2>
+            <pre id="historial"></pre>
+        </div>
+
         <div class="result" id="result"></div>
     </div>
 
     <script>
+        function mostrarFormulario(formId) {
+            document.querySelectorAll('.form-container').forEach(form => {
+                form.classList.remove('active');
+            });
+            document.getElementById(formId).classList.add('active');
+        }
+
         document.getElementById('climaForm').addEventListener('submit', function(event) {
             event.preventDefault();
             const ciudad = document.getElementById('ciudad').value;
@@ -62,6 +101,47 @@
                     console.error('Error:', error);
                     const resultDiv = document.getElementById('result');
                     resultDiv.innerHTML = '<p>Error al obtener el clima.</p>';
+                });
+        });
+
+        document.getElementById('pronosticoForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const ciudad = document.getElementById('ciudadPronostico').value;
+            const unidades = document.getElementById('unidadesPronostico').value;
+            const fecha = document.getElementById('fecha').value;
+
+            fetch(`/pronostico?ciudad=${ciudad}&unidades=${unidades}&fecha=${fecha}`)
+                .then(response => response.json())
+                .then(data => {
+                    const resultDiv = document.getElementById('result');
+                    if (data.error) {
+                        resultDiv.innerHTML = `<p>${data.error}</p>`;
+                    } else {
+                        resultDiv.innerHTML = `
+                            <h2>Pronóstico en ${data.ciudad} para ${data.fecha}</h2>
+                            <p>Temperatura: ${data.temperatura}</p>
+                            <p>Descripción: ${data.descripcion}</p>
+                            <p>Humedad: ${data.humedad}</p>
+                            <p>Velocidad del viento: ${data.velocidad_viento}</p>
+                        `;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    const resultDiv = document.getElementById('result');
+                    resultDiv.innerHTML = '<p>Error al obtener el pronóstico.</p>';
+                });
+        });
+
+        document.getElementById('historialForm').addEventListener('click', function() {
+            fetch('/historial')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('historial').textContent = data;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('historial').textContent = 'Error al obtener el historial.';
                 });
         });
     </script>

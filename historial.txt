@@ -1,0 +1,63 @@
+Fecha de consulta: 2024-10-22 18:35:07
+Ciudad: Mendoza
+Temperatura: 14.74°C
+Descripción: muy nuboso
+Humedad: 82%
+Velocidad del viento: 7.72 m/s
+
+Fecha de consulta: 2024-10-22 18:35:33
+Ciudad: Cordoba
+Temperatura: 21.14°C
+Descripción: nubes
+Humedad: 87%
+Velocidad del viento: 4.12 m/s
+
+Fecha de consulta: 2024-10-22 18:36:57
+Ciudad: Mendoza
+Temperatura: 14.74°C
+Descripción: muy nuboso
+Humedad: 82%
+Velocidad del viento: 7.72 m/s
+
+Fecha de consulta: 2024-10-22 18:37:31
+Ciudad: Mendoza
+Temperatura: 14.74°C
+Descripción: muy nuboso
+Humedad: 82%
+Velocidad del viento: 7.72 m/s
+
+Ciudad: Mendoza
+Fecha: 2024-10-22 18:40:20
+Temperatura: 58.53°F
+Descripción: muy nuboso
+Humedad: 82%
+Velocidad del viento: 17.27 m/s
+
+Ciudad: Mendoza
+Fecha: 2024-10-22 18:40:24
+Temperatura: 14.74°C
+Descripción: muy nuboso
+Humedad: 82%
+Velocidad del viento: 7.72 m/s
+
+Ciudad: Mendoza
+Fecha: 2024-10-22 18:40:28
+Temperatura: 58.53°F
+Descripción: muy nuboso
+Humedad: 82%
+Velocidad del viento: 17.27 m/s
+
+Ciudad: Mendoza
+Fecha: 2024-10-22 18:40:30
+Temperatura: 14.74°C
+Descripción: muy nuboso
+Humedad: 82%
+Velocidad del viento: 7.72 m/s
+
+Ciudad: Mendoza
+Fecha: 2024-10-22 18:40:37
+Temperatura: 20.23°C
+Descripción: cielo claro
+Humedad: 42%
+Velocidad del viento: 2.49 m/s
+
