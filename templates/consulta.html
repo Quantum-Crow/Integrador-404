@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <style>.heading{color: white}</style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Consulta de Clima</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
-<body>
-    <h1>Consulta de Clima</h1>
+<body bgcolor="0f0f0f" text="white">
+    <center>
+    <h1 class="heading">Consulta de Clima</h1>
     {% if tipo == 'clima_actual' %}
         <form action="/consultar_clima" method="post">
             <label for="ciudad">Ciudad:</label>
@@ -34,5 +36,6 @@
         </form>
     {% endif %}
     <a href="{{ url_for('index') }}">Volver</a>
+    </center>
 </body>
 </html>

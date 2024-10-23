@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <style>.heading{color: white}</style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Consulta de Clima</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
-<body>
-    <h1>Consulta de Clima</h1>
+<body bgcolor="0f0f0f" text="white">
+    <center>
+    <img src="{{ url_for('static', filename='img/image.png') }}" alt="Imagen de Clima" style="width:23%; height:auto;">
+    <h1 class="heading">Consulta de Clima</h1>
     <form action="/seleccionar_tipo" method="post">
         <label for="tipo">Tipo de Consulta:</label>
         <select id="tipo" name="tipo" required>
@@ -23,5 +26,6 @@
             <li>{{ consulta }}</li>
         {% endfor %}
     </ul>
+    </center>
 </body>
 </html>
