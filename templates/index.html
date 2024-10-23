@@ -3,67 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clima</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        .container {
-            max-width: 600px;
-            margin: auto;
-        }
-        .result {
-            margin-top: 20px;
-        }
-    </style>
+    <title>Consulta de Clima</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    <div class="container">
-        <h1>Consulta el Clima</h1>
-        <form id="climaForm">
-            <label for="ciudad">Ciudad:</label>
-            <input type="text" id="ciudad" name="ciudad" required>
-            <br><br>
-            <label for="unidades">Unidades:</label>
-            <select id="unidades" name="unidades">
-                <option value="C">Celsius</option>
-                <option value="F">Fahrenheit</option>
-            </select>
-            <br><br>
-            <button type="submit">Consultar</button>
-        </form>
-        <div class="result" id="result"></div>
-    </div>
+    <h1>Consulta de Clima</h1>
+    <form action="/seleccionar_tipo" method="post">
+        <label for="tipo">Tipo de Consulta:</label>
+        <select id="tipo" name="tipo" required>
+            <option value="clima_actual">Clima Actual</option>
+            <option value="pronostico">Pronóstico</option>
+        </select>
+        <button type="submit">Seleccionar</button>
+    </form>
 
-    <script>
-        document.getElementById('climaForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const ciudad = document.getElementById('ciudad').value;
-            const unidades = document.getElementById('unidades').value;
-
-            fetch(`/clima?ciudad=${ciudad}&unidades=${unidades}`)
-                .then(response => response.json())
-                .then(data => {
-                    const resultDiv = document.getElementById('result');
-                    if (data.error) {
-                        resultDiv.innerHTML = `<p>${data.error}</p>`;
-                    } else {
-                        resultDiv.innerHTML = `
-                            <h2>Clima en ${data.ciudad}, ${data.pais}</h2>
-                            <p>Temperatura: ${data.temperatura}</p>
-                            <p>Descripción: ${data.descripcion}</p>
-                            <p>Humedad: ${data.humedad}</p>
-                            <p>Velocidad del viento: ${data.velocidad_viento}</p>
-                        `;
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    const resultDiv = document.getElementById('result');
-                    resultDiv.innerHTML = '<p>Error al obtener el clima.</p>';
-                });
-        });
-    </script>
+    <h2>Historial de Consultas</h2>
+    <ul>
+        {% for consulta in historial %}
+            <li>{{ consulta }}</li>
+        {% endfor %}
+    </ul>
 </body>
 </html>
