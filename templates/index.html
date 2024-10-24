@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Consulta de Clima</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        .historial {
+            display: none;
+        }
+    </style>
 </head>
 <body bgcolor="0f0f0f" text="white">
     <center>
@@ -20,12 +25,26 @@
         <button type="submit">Seleccionar</button>
     </form>
 
-    <h2>Historial de Consultas</h2>
-    <ul>
-        {% for consulta in historial %}
-            <li>{{ consulta }}</li>
-        {% endfor %}
-    </ul>
+    <button id="toggleHistorial">Mostrar/Ocultar Historial</button>
+    <div id="historialContainer" class="historial">
+        <h2>Historial de Consultas</h2>
+        <ul>
+            {% for consulta in historial %}
+                <li>{{ consulta }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <script>
+        document.getElementById('toggleHistorial').addEventListener('click', function() {
+            var historialContainer = document.getElementById('historialContainer');
+            if (historialContainer.style.display === 'none' || historialContainer.style.display === '') {
+                historialContainer.style.display = 'block';
+            } else {
+                historialContainer.style.display = 'none';
+            }
+        });
+    </script>
     </center>
 </body>
 </html>
