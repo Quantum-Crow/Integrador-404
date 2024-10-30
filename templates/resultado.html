@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <style>.heading{color: white}</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado de Consulta</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body bgcolor="0f0f0f" text="white">
+    <center>
+    <h1 class="heading">Resultado de Consulta</h1>
+    <p>Ciudad: {{ resultado.ciudad }}</p>
+    <p>País: {{ resultado.pais }}</p>
+    <p>Temperatura: {{ resultado.temperatura }}</p>
+    <p>Descripción: {{ resultado.descripcion }}</p>
+    <p>Humedad: {{ resultado.humedad }}</p>
+    <p>Velocidad del Viento: {{ resultado.velocidad_viento }}</p>
+    <a href="{{ url_for('index') }}">Volver</a>
+    </center>
+</body>
+</html>

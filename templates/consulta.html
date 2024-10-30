@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <style>.heading{color: white}</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Clima</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body bgcolor="0f0f0f" text="white">
+    <center>
+    <h1 class="heading">Consulta de Clima</h1>
+    {% if tipo == 'clima_actual' %}
+        <form action="/consultar_clima" method="post">
+            <label for="ciudad">Ciudad:</label>
+            <input type="text" id="ciudad" name="ciudad" required>
+            <label for="unidad_temp">Unidad de Temperatura:</label>
+            <select id="unidad_temp" name="unidad_temp" required>
+                <option value="metric">Celsius</option>
+                <option value="imperial">Fahrenheit</option>
+            </select>
+            <button type="submit">Consultar Clima Actual</button>
+        </form>
+    {% elif tipo == 'pronostico' %}
+        <form action="/consultar_pronostico" method="post">
+            <label for="ciudad">Ciudad:</label>
+            <input type="text" id="ciudad" name="ciudad" required>
+            <label for="unidad_temp">Unidad de Temperatura:</label>
+            <select id="unidad_temp" name="unidad_temp" required>
+                <option value="metric">Celsius</option>
+                <option value="imperial">Fahrenheit</option>
+            </select>
+            <label for="fecha">Fecha:</label>
+            <input type="date" id="fecha" name="fecha" required>
+            <button type="submit">Consultar Pronóstico</button>
+        </form>
+    {% endif %}
+    <a href="{{ url_for('index') }}">Volver</a>
+    </center>
+</body>
+</html>
