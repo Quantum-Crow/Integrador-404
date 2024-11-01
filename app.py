@@ -48,7 +48,7 @@ def consultar_clima():
             'velocidad_viento': f"{datos_clima['wind']['speed']} metros por segundo"
         })
     else:
-        return render_template('error.html', error='No se pudo obtener el clima')
+        return render_template('error.html', error='Compruebe el nombre de la ciudad e intente de nuevo')
 
 @app.route('/consultar_pronostico', methods=['POST'])
 def consultar_pronostico():
@@ -75,7 +75,7 @@ def consultar_pronostico():
                 })
         return render_template('error.html', error='No se encontró pronóstico para la fecha seleccionada')
     else:
-        return render_template('error.html', error='No se pudo obtener el pronóstico')
+        return render_template('error.html', error='Compruebe el nombre de la ciudad e intente de nuevo')
 
 if __name__ == '__main__':
     # app.run(debug=True)

@@ -11,10 +11,23 @@
             display: none;
         }
     </style>
+    <script>
+        function validarCiudad() {
+            var ciudadInput = document.getElementById('ciudad');
+            var ciudad = ciudadInput.value;
+            var regex = /^[a-zA-Z\s]+$/;
+            if (!regex.test(ciudad)) {
+                alert('El nombre de la ciudad no puede contener números.');
+                ciudadInput.value = '';
+                return false;
+            }
+            return true;
+        }
+    </script>
 </head>
 <body bgcolor="0f0f0f" text="white">
     <center>
-    <img src="{{ url_for('static', filename='img/image.png') }}" alt="Imagen de Clima" style="width:23%; height:auto;">
+    <img src="{{ url_for('static', filename='img/image.png') }}" alt="Imagen de Clima" style="width:10%; height:auto;">
     <h1 class="heading">Consulta de Clima</h1>
     <form action="/seleccionar_tipo" method="post">
         <label for="tipo">Tipo de Consulta:</label>

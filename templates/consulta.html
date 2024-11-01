@@ -6,6 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Consulta de Clima</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script>
+        function validarCiudad() {
+            var ciudadInput = document.getElementById('ciudad');
+            var ciudad = ciudadInput.value;
+            var regex = /^[a-zA-Z\s]+$/;
+            if (!regex.test(ciudad)) {
+                alert('El nombre de la ciudad no puede contener números.');
+                ciudadInput.value = '';
+                return false;
+            }
+            return true;
+        }
+    </script>
 </head>
 <body bgcolor="0f0f0f" text="white">
     <center>
